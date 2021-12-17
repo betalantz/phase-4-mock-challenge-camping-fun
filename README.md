@@ -52,8 +52,8 @@ Depending on your preference, you can either check your progress by:
 
 You need to create the following relationships:
 
-- A `Camper` has many `Activity`s through `Signup`s
-- An `Activity` has many `Camper`s through `Signup`s
+- A `Camper` has many `Signups`, and has many `Activity`s through `Signup`s
+- An `Activity` has many `Signups`, and has many has many `Camper`s through `Signup`s
 - A `Signup` belongs to a `Camper` and belongs to a `Activity`
 
 Start by creating the models and migrations for the following database tables:
@@ -93,7 +93,9 @@ specified along with the appropriate HTTP verb.
 
 ### GET /campers
 
-Return JSON data in the format below:
+Return JSON data in the format below. **Note**: you should return a JSON
+response in this format, without any additional nested data related to each
+camper.
 
 ```json
 [
@@ -136,7 +138,10 @@ Return JSON data in the format below:
 
 ### GET /campers/:id
 
-If the `Camper` exists, return JSON data in the format below:
+If the `Camper` exists, return JSON data in the format below. **Note**: you will
+need to serialize the data for this response differently than for the
+`GET /campers` route. Make sure to include an array of activities for each
+camper.
 
 ```json
 {
